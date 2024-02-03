@@ -1,2 +1,27 @@
-package pious.playright.model;public class Version {
+package pious.playright.model;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
+@Table(name = "versions")
+public class Version {
+    @Id
+    @GeneratedValue
+    private UUID id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fileId", nullable = false)
+    private File file;
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(255) default '1.0.0'")
+    private String version;
+
+    private String content;
+    private String createdById;
+    private String changeDescription;
+    private final String status = "draft";
+    private LocalDateTime createdAt;
 }
