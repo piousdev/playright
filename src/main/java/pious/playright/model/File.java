@@ -18,10 +18,6 @@ import java.util.UUID;
 public class File {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            type = org.hibernate.id.uuid.UuidGenerator.class
-    )
     private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)

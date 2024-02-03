@@ -15,10 +15,6 @@ import java.util.UUID;
 public class Collection {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            type = org.hibernate.id.uuid.UuidGenerator.class
-    )
     private UUID id;
 
     @Column(nullable = false)
