@@ -1,6 +1,7 @@
-import {Link} from "react-router-dom";
-import { SignOutButton, SignInButton, SignedIn, SignedOut } from "@clerk/clerk-react"
-import './App.css'
+import { SignInButton, SignOutButton, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
+import './App.css';
+import UserList from "./components/userList";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
                       <li><Link to="/dashboard">Dashboard</Link></li>
                   </ul>
               </div>
+              <UserList/>
           </div>
           <div>
               <SignedOut>

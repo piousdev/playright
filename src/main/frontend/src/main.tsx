@@ -1,18 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import './index.css'
 
 // Import layouts
-import RootLayout from './layouts/root-layout'
 import DashboardLayout from './layouts/dashboard-layout'
+import RootLayout from './layouts/root-layout'
 
 // Import components
 import IndexPage from './routes'
 import ContactPage from './routes/contact'
+import DashboardPage from './routes/dashboard'
 import SignInPage from './routes/sign-in'
 import SignUpPage from './routes/sign-up'
-import DashboardPage from './routes/dashboard'
 
 const router = createBrowserRouter([
     {

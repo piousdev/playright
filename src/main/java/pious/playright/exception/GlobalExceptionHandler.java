@@ -21,4 +21,10 @@ public class GlobalExceptionHandler {
     public void handleDuplicateUserException(DuplicateUserException exception) {
         LOGGER.error("Duplicate user", exception);
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(UserEmailNotVerifiedException.class)
+    public void handleUserEmailNotVerifiedException(UserEmailNotVerifiedException exception) {
+        LOGGER.error("User email not verified", exception);
+    }
 }
