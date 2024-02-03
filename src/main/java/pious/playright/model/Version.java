@@ -1,16 +1,27 @@
 package pious.playright.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "versions")
 public class Version {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            type = org.hibernate.id.uuid.UuidGenerator.class
+    )
     private UUID id;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fileId", nullable = false)
@@ -22,6 +33,10 @@ public class Version {
     private String content;
     private String createdById;
     private String changeDescription;
-    private final String status = "draft";
+
+    @Column(nullable = false)
+    private String status = "draft";
+
+    @CreationTimestamp
     private LocalDateTime createdAt;
 }
