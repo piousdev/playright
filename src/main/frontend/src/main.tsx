@@ -8,20 +8,19 @@ import DashboardLayout from './layouts/dashboard-layout'
 import RootLayout from './layouts/root-layout'
 
 // Import components
-import IndexPage from './routes'
-import ContactPage from './routes/contact'
 import DashboardPage from './routes/dashboard'
-import SignInPage from './routes/sign-in'
-import SignUpPage from './routes/sign-up'
+import Developers from './routes/developer'
+import Hub from './routes/hub'
+import Playground from './routes/playground'
 
 const router = createBrowserRouter([
     {
         element: <RootLayout />,
         children: [
-            { path: "/", element: <IndexPage /> },
-            { path: "/contact", element: <ContactPage /> },
-            { path: "/sign-in", element: <SignInPage /> },
-            { path: "/sign-up", element: <SignUpPage /> },
+            { path: "/", element: <Hub /> },
+            { path: "/hub", element: <Hub /> },
+            { path: "/playground", element: <Playground /> },
+            { path: "/developer", element: <Developers /> },
             {
                 element: <DashboardLayout />,
                 path: "dashboard",

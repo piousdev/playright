@@ -1,6 +1,6 @@
-import {Link, Outlet, useNavigate} from 'react-router-dom'
-import { ClerkProvider, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
-import { Button } from '../components/ui/button';
+import { ClerkProvider } from '@clerk/clerk-react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Navbar from '../components/navigation/navbar';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -13,17 +13,7 @@ export default function RootLayout() {
     return (
         <ClerkProvider navigate={navigate} publishableKey={PUBLISHABLE_KEY}>
             <header className="header">
-                <div>
-                    <Button>
-                        <p>Clerk + React + React Router App</p>
-                    </Button>
-                    <SignedIn>
-                        <UserButton afterSignOutUrl='/sign-in' />
-                    </SignedIn>
-                    <SignedOut>
-                        <Link to="/sign-in">Sign In</Link>
-                    </SignedOut>
-                </div>
+                <Navbar />
             </header>
             <main>
                 <Outlet />
