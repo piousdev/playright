@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileDTO {
-    private UUID id;
+    private UUID id; 
 
     @NotNull(message = "User ID cannot be null")
     private UUID userId;

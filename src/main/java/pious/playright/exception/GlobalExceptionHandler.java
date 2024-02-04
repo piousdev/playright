@@ -27,4 +27,16 @@ public class GlobalExceptionHandler {
     public void handleUserEmailNotVerifiedException(UserEmailNotVerifiedException exception) {
         LOGGER.error("User email not verified", exception);
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(FileNotFoundException.class)
+    public void handleFileNotFoundException(FileNotFoundException exception) {
+        LOGGER.error("File not found", exception);
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(CollectionNotFoundException.class)
+    public void handleCollectionNotFoundException(CollectionNotFoundException exception) {
+        LOGGER.error("Collection not found", exception);
+    }
 }
