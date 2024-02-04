@@ -6,7 +6,7 @@ import { callAPI } from './callApi.ts'
  * @param user - The user data.
  * @returns A Promise that resolves to the created user.
  */
-export const createUser = (user: UserDTO): Promise<UserDTO> => callAPI<UserDTO, UserDTO>('post', '', user);
+export const createUser = (user: UserDTO): Promise<UserDTO> => callAPI<UserDTO, UserDTO>('post', '/users', user);
 
 /**
  * Updates a user with the specified ID.
@@ -14,7 +14,7 @@ export const createUser = (user: UserDTO): Promise<UserDTO> => callAPI<UserDTO, 
  * @param user - The updated user data.
  * @returns A Promise that resolves to the updated user.
  */
-export const updateUser = (id: string, user: UserDTO): Promise<UserDTO> => callAPI<UserDTO, UserDTO>('put', `/${id}`, user);
+export const updateUser = (id: string, user: UserDTO): Promise<UserDTO> => callAPI<UserDTO, UserDTO>('put', `/users/${id}`, user);
 
 /**
  * Deletes a user with the specified ID.
@@ -28,4 +28,4 @@ export const getUsers = (): Promise<UserDTO[]> => callAPI<UserDTO[]>('get');
  * @param id - The ID of the user to get.
  * @returns A Promise that resolves to the user.
  */
-export const getUser = (id: string): Promise<UserDTO> => callAPI<UserDTO>('get', `/${id}`);
+export const getUser = (id: string): Promise<UserDTO> => callAPI<UserDTO>('get', `/users/${id}`);

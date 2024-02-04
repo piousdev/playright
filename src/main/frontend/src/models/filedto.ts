@@ -5,4 +5,9 @@ export interface FileDTO {
     description : string,
     content : string,
     language : string
+    starred : boolean
+    createdAt : string
+    updatedAt : string
+    currentVersionId : number
+    collectionId : string
 }

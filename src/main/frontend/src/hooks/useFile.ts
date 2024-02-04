@@ -3,43 +3,84 @@ import { showToast } from "../utils/getToast.ts";
 import { callAPI } from "../api/callApi.ts";
 import { FileDTO } from "../models/filedto";
 
-interface ErrorResponse {
+interface UseFileReturn {
+	saveFile: (fileData: {
+		createdAt: string | undefined;
+		starred: boolean;
+		name: string;
+		currentVersionId: number | undefined;
+		description: string;
+		language: string;
+		id: string | undefined;
+		userId: string | undefined;
+		collectionId: string | undefined;
+		content: string;
+		updatedAt: string | undefined
+	}, onSuccess: (file: SavedFile) => void, onError: (error: (ErrorResponse | NetworkError)) => void) => Promise<void>;
+	isLoading: boolean;
+}
+
+export interface ErrorResponse {
 	message: string;
 	timestamp?: string;
-	details?: string;
+	response?: {
+		data: {
+			statusText: string;
+			status: number;
+		};
+	};
 }
 
-interface NetworkError {
+export interface NetworkError {
 	type: "http";
+	message: string;
 	status: number;
-	statusText: string;
-	errorResponse?: ErrorResponse;
+	response?: {
+		data: {
+			statusText: string;
+			status: number;
+		};
+	}
 }
 
-const useFile = () => {
+/**
+ * A hook to handle file operations.
+ * @returns {Object} The file operations.
+ * @returns {Function} saveFile - Saves a file to the server.
+ * @returns {boolean} isLoading - Whether the file is currently being saved.
+ * @returns {Function} handleAPIError - Handles an API error.
+ */
+const useFile = (): UseFileReturn => {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const handleAPIError = (error: any): ErrorResponse | NetworkError => {
+	const handleAPIError = (error: ErrorResponse | NetworkError) => {
 		// This function should be tailored based on how errors are structured in your Java backend
-		let errorData: ErrorResponse | NetworkError = {
+		const errorData: ErrorResponse | NetworkError = {
 			type: "http",
-			statusText: "An unknown error occurred",
+			message: "An unknown error occurred",
 			status: 500,
 		};
 		if (error.response) {
-			errorData.statusText = error.response.data.statusText || "An error occurred during the HTTP request";
-			errorData.status = error.response.data.status || "500";
+			errorData.message = error.response.data.statusText || "An error occurred during the HTTP request";
+			errorData.status = error.response.data.status || 500;
 		}
-		// Add more logic if you have specific error handling for database errors
+
 		return errorData;
 	};
 
+	/**
+	 * Saves a file to the server.
+	 * @param fileData - The file data to save.
+	 * @param onSuccess - The function to call when the file is saved successfully.
+	 * @param onError - The function to call when an error occurs.
+	 */
 	const saveFile = async (
-		fileData: FileDTO, // Adjusted to use FileDTO directly
-		onSuccess: (file: FileDTO) => void,
-		onError: (error: ErrorResponse | NetworkError) => void
+		fileData: FileDTO,
+		onSuccess: (_file: FileDTO) => void,
+		onError: (_error: (ErrorResponse | NetworkError)) => void,
 	) => {
 		setIsLoading(true);
+
 		try {
 			const method = fileData.id ? 'put' : 'post';
 			const path = fileData.id ? `/api/files/${fileData.id}` : "/api/files";
@@ -48,9 +89,9 @@ const useFile = () => {
 			showToast({ message: "File saved successfully" });
 			onSuccess(file);
 		} catch (error) {
-			const errorData = handleAPIError(error);
+			const errorData = handleAPIError(error as ErrorResponse | NetworkError);
 			if ('statusText' in errorData) {
-				showToast({ message: errorData.statusText, isError: true })
+				showToast({ message: errorData.statusText as string, isError: true })
 			}
 			onError(errorData);
 		} finally {
