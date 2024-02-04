@@ -16,7 +16,7 @@ function App() {
                       <li><Link to="/dashboard">Dashboard</Link></li>
                   </ul>
               </div>
-              <UserList/>
+
           </div>
           <div>
               <SignedOut>

@@ -1,7 +1,5 @@
-function creators() {
+export default function creators() {
   return (
-    <div>creators</div>
+    <div className='ml-[10rem]'>creators</div>
   )
 }
-
-export default creators

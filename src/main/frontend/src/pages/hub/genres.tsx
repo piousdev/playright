@@ -1,5 +1,5 @@
 export default function genres() {
   return (
-    <div>genres</div>
+    <div className='ml-[10rem]'>genres</div>
   )
 }

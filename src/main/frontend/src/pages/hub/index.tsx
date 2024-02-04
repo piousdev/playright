@@ -1,5 +1,5 @@
 export default function HubIndexPage() {
   return (
-    <div>hub</div>
+    <div className='ml-[10rem]'>hub</div>
   )
 }

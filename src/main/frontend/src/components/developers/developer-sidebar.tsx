@@ -1,7 +1,7 @@
-function developers() {
+function DeveloperSidebar() {
   return (
-    <div>developers</div>
+    <div>side bar for developer page</div>
   )
 }
 
-export default developers;
+export default DeveloperSidebar;

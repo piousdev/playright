@@ -8,7 +8,7 @@ type Route = {
     external?: boolean;
 };
 
-export const Sidebar = () => {
+export const HubSidebar = () => {
     const location = useLocation();
     // const router = useRouter();
 
@@ -41,7 +41,7 @@ export const Sidebar = () => {
 
     return (
         <div className='space-y-4 flex flex-col h-full text-primary bg-secondary mt-[3.5rem] pt-[2rem] w-[180px]'>
-            <div className='flex justify-center flex-1 p-3'>
+            <nav className='flex justify-center flex-1 p-3'>
                 <div className='space-y-2'>
                     {routes.map((route) => (
                         <div
@@ -67,7 +67,7 @@ export const Sidebar = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </nav>
         </div>
     );
 };

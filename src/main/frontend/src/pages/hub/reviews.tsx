@@ -1,7 +1,5 @@
-function reviews() {
+export default function reviews() {
   return (
-    <div>reviews</div>
+    <div className='ml-[10rem]'>reviews</div>
   )
 }
-
-export default reviews
